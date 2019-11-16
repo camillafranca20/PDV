@@ -2,6 +2,8 @@ package View;
 
 import Utilitarios.conexao;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -23,6 +25,7 @@ public final class frmCaixa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Não localizou dados" + erro.getMessage());
         }
     }
+
  
     public frmCaixa() {
         initComponents();
@@ -58,6 +61,32 @@ public final class frmCaixa extends javax.swing.JFrame {
     private void initComponents() {
 
         PDV = new javax.swing.JTabbedPane();
+        cliente = new javax.swing.JPanel();
+        lblTitulo_cliente = new javax.swing.JLabel();
+        lblNome_cliente = new javax.swing.JLabel();
+        txtNome_cliente = new javax.swing.JTextField();
+        lblCod_cliente = new javax.swing.JLabel();
+        txtcod_cliente = new javax.swing.JTextField();
+        lblBonus_cliente = new javax.swing.JLabel();
+        txtbonus_cliente = new javax.swing.JTextField();
+        lblPerfil = new javax.swing.JLabel();
+        comboPerfil_cliente = new javax.swing.JComboBox<>();
+        btnSalvar_cliente = new javax.swing.JButton();
+        produto = new javax.swing.JPanel();
+        lblTitulo_produto = new javax.swing.JLabel();
+        lblCod_produto = new javax.swing.JLabel();
+        txtcodprod_produto = new javax.swing.JTextField();
+        lblCodLocal_produto = new javax.swing.JLabel();
+        txtcodlocal_produto = new javax.swing.JTextField();
+        lblNomeLocal_produto = new javax.swing.JLabel();
+        txtnomelocal_produto = new javax.swing.JTextField();
+        lblDescricao_produto = new javax.swing.JLabel();
+        txtdescricao_produto = new javax.swing.JTextField();
+        lblQtdEstoque_produto = new javax.swing.JLabel();
+        spnQtdEstoque_produto = new javax.swing.JSpinner();
+        lblPrecoUnit_produto = new javax.swing.JLabel();
+        txtprecoUnit_produto = new javax.swing.JFormattedTextField();
+        btnSalvar_produto = new javax.swing.JButton();
         panelCaixa = new javax.swing.JPanel();
         lblCodProduto_caixa = new javax.swing.JLabel();
         lblQtd_caixa = new javax.swing.JLabel();
@@ -79,32 +108,6 @@ public final class frmCaixa extends javax.swing.JFrame {
         txtCodProduto_caixa = new javax.swing.JTextField();
         lblCodCli_cliente = new javax.swing.JLabel();
         txtCodCli_cliente = new javax.swing.JTextField();
-        cliente = new javax.swing.JPanel();
-        lblTitulo_cliente = new javax.swing.JLabel();
-        lblNome_cliente = new javax.swing.JLabel();
-        txtNome_cliente = new javax.swing.JTextField();
-        lblCod_cliente = new javax.swing.JLabel();
-        txtcodcliente = new javax.swing.JTextField();
-        lblBonus_cliente = new javax.swing.JLabel();
-        txtbonus_cliente = new javax.swing.JTextField();
-        lblPerfil = new javax.swing.JLabel();
-        comboPerfil_cliente = new javax.swing.JComboBox<>();
-        btnSalvar_cliente = new javax.swing.JButton();
-        produto = new javax.swing.JPanel();
-        lblTitulo_produto = new javax.swing.JLabel();
-        lblCod_produto = new javax.swing.JLabel();
-        txtcodprod_produto = new javax.swing.JTextField();
-        lblCodLocal = new javax.swing.JLabel();
-        txtcodlocal_produto = new javax.swing.JTextField();
-        lblNomeLocal_produto = new javax.swing.JLabel();
-        txtnomelocal = new javax.swing.JTextField();
-        lblDescricao_produto = new javax.swing.JLabel();
-        txtdescricao_produto = new javax.swing.JTextField();
-        lblQtdEstoque_produto = new javax.swing.JLabel();
-        spnQtdEstoque_produto = new javax.swing.JSpinner();
-        lblPrecoUnit_produto = new javax.swing.JLabel();
-        txtprecoUnit_produto = new javax.swing.JFormattedTextField();
-        btnSalvar_produto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CONTROLE DE CAIXA");
@@ -113,6 +116,204 @@ public final class frmCaixa extends javax.swing.JFrame {
         PDV.setBackground(new java.awt.Color(153, 153, 153));
         PDV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         PDV.setForeground(new java.awt.Color(0, 0, 153));
+
+        cliente.setBackground(new java.awt.Color(229, 255, 255));
+
+        lblTitulo_cliente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblTitulo_cliente.setForeground(new java.awt.Color(0, 0, 153));
+        lblTitulo_cliente.setText("CADASTRAR NOVO CLIENTE");
+
+        lblNome_cliente.setText("Nome:");
+
+        txtNome_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNome_clienteActionPerformed(evt);
+            }
+        });
+
+        lblCod_cliente.setText("Código do cliente:");
+
+        txtcod_cliente.setEditable(false);
+
+        lblBonus_cliente.setText("Bônus:");
+
+        lblPerfil.setText("Perfil:");
+
+        comboPerfil_cliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "P - Pequeno", "M - Médio", "G - Grande" }));
+
+        btnSalvar_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/AwesomeScreenshot-TRE-SP-2019-07-26-23-07-03.png"))); // NOI18N
+        btnSalvar_cliente.setText("Salvar");
+        btnSalvar_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvar_clienteActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout clienteLayout = new javax.swing.GroupLayout(cliente);
+        cliente.setLayout(clienteLayout);
+        clienteLayout.setHorizontalGroup(
+            clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(clienteLayout.createSequentialGroup()
+                .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(clienteLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblPerfil)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboPerfil_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(clienteLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblNome_cliente)
+                        .addGap(8, 8, 8)
+                        .addComponent(txtNome_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(clienteLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(lblCod_cliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtcod_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(lblBonus_cliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtbonus_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(clienteLayout.createSequentialGroup()
+                        .addGap(253, 253, 253)
+                        .addComponent(btnSalvar_cliente))
+                    .addGroup(clienteLayout.createSequentialGroup()
+                        .addGap(182, 182, 182)
+                        .addComponent(lblTitulo_cliente)))
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+        clienteLayout.setVerticalGroup(
+            clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(clienteLayout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(lblTitulo_cliente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtcod_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCod_cliente)
+                    .addComponent(txtbonus_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblBonus_cliente))
+                .addGap(33, 33, 33)
+                .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNome_cliente)
+                    .addComponent(txtNome_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboPerfil_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPerfil))
+                .addGap(111, 111, 111)
+                .addComponent(btnSalvar_cliente)
+                .addGap(47, 47, 47))
+        );
+
+        PDV.addTab("INCLUIR CLIENTE", new javax.swing.ImageIcon(getClass().getResource("/icones/bootloader_users_person_people_6080.png")), cliente); // NOI18N
+
+        produto.setBackground(new java.awt.Color(229, 255, 255));
+
+        lblTitulo_produto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblTitulo_produto.setForeground(new java.awt.Color(0, 0, 153));
+        lblTitulo_produto.setText("CADASTRAR NOVO PRODUTO");
+
+        lblCod_produto.setText("Código do produto: ");
+
+        txtcodprod_produto.setEditable(false);
+
+        lblCodLocal_produto.setText("Código do local:");
+
+        txtcodlocal_produto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcodlocal_produtoActionPerformed(evt);
+            }
+        });
+
+        lblNomeLocal_produto.setText("Nome do Local:");
+
+        txtnomelocal_produto.setEditable(false);
+
+        lblDescricao_produto.setText("Descrição do produto:");
+
+        lblQtdEstoque_produto.setText("Quantidade no Estoque:");
+
+        lblPrecoUnit_produto.setText("Preço Unitário:");
+
+        txtprecoUnit_produto.setText("R$0,00");
+
+        btnSalvar_produto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/AwesomeScreenshot-TRE-SP-2019-07-26-23-07-03.png"))); // NOI18N
+        btnSalvar_produto.setText("Salvar");
+
+        javax.swing.GroupLayout produtoLayout = new javax.swing.GroupLayout(produto);
+        produto.setLayout(produtoLayout);
+        produtoLayout.setHorizontalGroup(
+            produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(produtoLayout.createSequentialGroup()
+                .addGroup(produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(produtoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(produtoLayout.createSequentialGroup()
+                                    .addComponent(lblDescricao_produto)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtdescricao_produto))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, produtoLayout.createSequentialGroup()
+                                    .addComponent(lblCodLocal_produto)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtcodlocal_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblNomeLocal_produto)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtnomelocal_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, produtoLayout.createSequentialGroup()
+                                .addComponent(lblQtdEstoque_produto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spnQtdEstoque_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblPrecoUnit_produto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnSalvar_produto)
+                                    .addComponent(txtprecoUnit_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(produtoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblCod_produto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtcodprod_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(produtoLayout.createSequentialGroup()
+                        .addGap(193, 193, 193)
+                        .addComponent(lblTitulo_produto)))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        produtoLayout.setVerticalGroup(
+            produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(produtoLayout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(lblTitulo_produto)
+                .addGap(72, 72, 72)
+                .addGroup(produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCod_produto)
+                    .addComponent(txtcodprod_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
+                .addGroup(produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCodLocal_produto)
+                    .addComponent(txtcodlocal_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNomeLocal_produto)
+                    .addComponent(txtnomelocal_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDescricao_produto)
+                    .addComponent(txtdescricao_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblQtdEstoque_produto)
+                    .addComponent(spnQtdEstoque_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPrecoUnit_produto)
+                    .addComponent(txtprecoUnit_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addComponent(btnSalvar_produto)
+                .addGap(52, 52, 52))
+        );
+
+        PDV.addTab("INCLUIR PRODUTO", new javax.swing.ImageIcon(getClass().getResource("/icones/shipping_products_22121 (2)_1.png")), produto); // NOI18N
 
         panelCaixa.setBackground(new java.awt.Color(229, 255, 255));
 
@@ -123,6 +324,11 @@ public final class frmCaixa extends javax.swing.JFrame {
         lblQtd_caixa.setText("Quantidade:");
 
         txtQtd_caixa.setToolTipText("");
+        txtQtd_caixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtQtd_caixaActionPerformed(evt);
+            }
+        });
 
         btnVender_caixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/Actions-dialog-ok-apply-icon.png"))); // NOI18N
         btnVender_caixa.setText("Vender");
@@ -164,13 +370,31 @@ public final class frmCaixa extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblProdutos_caixa.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                tblProdutos_caixaInputMethodTextChanged(evt);
+            }
+        });
         tabelaProduto_caixa.setViewportView(tblProdutos_caixa);
+        if (tblProdutos_caixa.getColumnModel().getColumnCount() > 0) {
+            tblProdutos_caixa.getColumnModel().getColumn(0).setHeaderValue("Produto");
+            tblProdutos_caixa.getColumnModel().getColumn(1).setHeaderValue("Quantidade");
+            tblProdutos_caixa.getColumnModel().getColumn(2).setHeaderValue("Preço Unitário");
+            tblProdutos_caixa.getColumnModel().getColumn(3).setHeaderValue("Valor Total");
+        }
 
         lblTotalCompra_caixa.setForeground(new java.awt.Color(0, 0, 153));
         lblTotalCompra_caixa.setText("Total da Compra:");
 
         txtTotalCompra_caixa.setEditable(false);
         txtTotalCompra_caixa.setToolTipText("");
+        txtTotalCompra_caixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTotalCompra_caixaActionPerformed(evt);
+            }
+        });
 
         btnFechar_caixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/logout-icon.png"))); // NOI18N
         btnFechar_caixa.setText("Fechar");
@@ -194,6 +418,12 @@ public final class frmCaixa extends javax.swing.JFrame {
 
         lblCodCli_cliente.setForeground(new java.awt.Color(0, 0, 153));
         lblCodCli_cliente.setText("Codigo do cliente:");
+
+        txtCodCli_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodCli_clienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelCaixaLayout = new javax.swing.GroupLayout(panelCaixa);
         panelCaixa.setLayout(panelCaixaLayout);
@@ -301,198 +531,6 @@ public final class frmCaixa extends javax.swing.JFrame {
 
         PDV.addTab("CAIXA", new javax.swing.ImageIcon(getClass().getResource("/icones/cashier_icon-icons.com_53629.png")), panelCaixa); // NOI18N
 
-        cliente.setBackground(new java.awt.Color(229, 255, 255));
-
-        lblTitulo_cliente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        lblTitulo_cliente.setForeground(new java.awt.Color(0, 0, 153));
-        lblTitulo_cliente.setText("CADASTRAR NOVO CLIENTE");
-
-        lblNome_cliente.setText("Nome:");
-
-        txtNome_cliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNome_clienteActionPerformed(evt);
-            }
-        });
-
-        lblCod_cliente.setText("Código do cliente:");
-
-        txtcodcliente.setEditable(false);
-
-        lblBonus_cliente.setText("Bônus:");
-
-        lblPerfil.setText("Perfil:");
-
-        comboPerfil_cliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "P - Pequeno", "M - Médio", "G - Grande" }));
-
-        btnSalvar_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/AwesomeScreenshot-TRE-SP-2019-07-26-23-07-03.png"))); // NOI18N
-        btnSalvar_cliente.setText("Salvar");
-        btnSalvar_cliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvar_clienteActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout clienteLayout = new javax.swing.GroupLayout(cliente);
-        cliente.setLayout(clienteLayout);
-        clienteLayout.setHorizontalGroup(
-            clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(clienteLayout.createSequentialGroup()
-                .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(clienteLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblPerfil)
-                        .addGap(18, 18, 18)
-                        .addComponent(comboPerfil_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(clienteLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblNome_cliente)
-                        .addGap(8, 8, 8)
-                        .addComponent(txtNome_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(clienteLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(lblCod_cliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtcodcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
-                        .addComponent(lblBonus_cliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtbonus_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(clienteLayout.createSequentialGroup()
-                        .addGap(253, 253, 253)
-                        .addComponent(btnSalvar_cliente))
-                    .addGroup(clienteLayout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addComponent(lblTitulo_cliente)))
-                .addContainerGap(48, Short.MAX_VALUE))
-        );
-        clienteLayout.setVerticalGroup(
-            clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(clienteLayout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(lblTitulo_cliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-                .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtcodcliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCod_cliente)
-                    .addComponent(txtbonus_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblBonus_cliente))
-                .addGap(33, 33, 33)
-                .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNome_cliente)
-                    .addComponent(txtNome_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboPerfil_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPerfil))
-                .addGap(111, 111, 111)
-                .addComponent(btnSalvar_cliente)
-                .addGap(47, 47, 47))
-        );
-
-        PDV.addTab("INCLUIR CLIENTE", new javax.swing.ImageIcon(getClass().getResource("/icones/bootloader_users_person_people_6080.png")), cliente); // NOI18N
-
-        produto.setBackground(new java.awt.Color(229, 255, 255));
-
-        lblTitulo_produto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        lblTitulo_produto.setForeground(new java.awt.Color(0, 0, 153));
-        lblTitulo_produto.setText("CADASTRAR NOVO PRODUTO");
-
-        lblCod_produto.setText("Código do produto: ");
-
-        txtcodprod_produto.setEditable(false);
-
-        lblCodLocal.setText("Código do local:");
-
-        lblNomeLocal_produto.setText("Nome do Local:");
-
-        txtnomelocal.setEditable(false);
-
-        lblDescricao_produto.setText("Descrição do produto:");
-
-        lblQtdEstoque_produto.setText("Quantidade no Estoque:");
-
-        lblPrecoUnit_produto.setText("Preço Unitário:");
-
-        txtprecoUnit_produto.setText("R$0,00");
-
-        btnSalvar_produto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/AwesomeScreenshot-TRE-SP-2019-07-26-23-07-03.png"))); // NOI18N
-        btnSalvar_produto.setText("Salvar");
-
-        javax.swing.GroupLayout produtoLayout = new javax.swing.GroupLayout(produto);
-        produto.setLayout(produtoLayout);
-        produtoLayout.setHorizontalGroup(
-            produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(produtoLayout.createSequentialGroup()
-                .addGroup(produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(produtoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(produtoLayout.createSequentialGroup()
-                                    .addComponent(lblDescricao_produto)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtdescricao_produto))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, produtoLayout.createSequentialGroup()
-                                    .addComponent(lblCodLocal)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtcodlocal_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(lblNomeLocal_produto)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtnomelocal, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, produtoLayout.createSequentialGroup()
-                                .addComponent(lblQtdEstoque_produto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spnQtdEstoque_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblPrecoUnit_produto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSalvar_produto)
-                                    .addComponent(txtprecoUnit_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(produtoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblCod_produto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtcodprod_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(produtoLayout.createSequentialGroup()
-                        .addGap(193, 193, 193)
-                        .addComponent(lblTitulo_produto)))
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
-        produtoLayout.setVerticalGroup(
-            produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(produtoLayout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(lblTitulo_produto)
-                .addGap(72, 72, 72)
-                .addGroup(produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCod_produto)
-                    .addComponent(txtcodprod_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addGroup(produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodLocal)
-                    .addComponent(txtcodlocal_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNomeLocal_produto)
-                    .addComponent(txtnomelocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDescricao_produto)
-                    .addComponent(txtdescricao_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblQtdEstoque_produto)
-                    .addComponent(spnQtdEstoque_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPrecoUnit_produto)
-                    .addComponent(txtprecoUnit_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
-                .addComponent(btnSalvar_produto)
-                .addGap(52, 52, 52))
-        );
-
-        PDV.addTab("INCLUIR PRODUTO", null, produto);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -512,8 +550,6 @@ public final class frmCaixa extends javax.swing.JFrame {
      String local = txtLocalVenda_caixa.getText();
      String codCli = txtNomecliente_caixa.getText();
      String qtdProd = txtQtd_caixa.getText();
-     String descricao = txtDescricao_caixa.getText();
-     String Nome = txtNomecliente_caixa.getText();
      String valortotal = txtTotalCompra_caixa.getText();
      
      try{
@@ -548,9 +584,46 @@ public final class frmCaixa extends javax.swing.JFrame {
         String descricao = txtDescricao_caixa.getText();
     }//GEN-LAST:event_btnSalvar_clienteActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void txtcodlocal_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcodlocal_produtoActionPerformed
+        String codLocal = txtcodlocal_produto.getText();
+        String retornaLocal = "SELECT NOME FROM localidade WHERE CODLOCAL = '" + codLocal + "'";
+        txtdescricao_produto.setText(retornaLocal);
+    }//GEN-LAST:event_txtcodlocal_produtoActionPerformed
+
+    private void txtCodCli_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodCli_clienteActionPerformed
+        String codCliente = txtcod_cliente.getText();
+        String retornaNome = "SELECT NOME FROM cliente WHERE CODCLI = '" + codCliente+ "'";
+        try {
+            con_cliente.statement.executeQuery(retornaNome);
+        } catch (SQLException ex) {
+            Logger.getLogger(frmCaixa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        txtNomecliente_caixa.setText(retornaNome);
+    }//GEN-LAST:event_txtCodCli_clienteActionPerformed
+
+    private void txtQtd_caixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtd_caixaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQtd_caixaActionPerformed
+
+    private void txtTotalCompra_caixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalCompra_caixaActionPerformed
+        String qtdProduto = txtQtd_caixa.getText();
+        String codProd = txtCodProduto_caixa.getText();
+        String precoUnit = "SELECT precoUnit FROM produto WHERE CODPROD = '" + codProd + "'";
+            try {
+                con_produto.statement.executeQuery(precoUnit);
+                } catch (SQLException ex) {
+                    Logger.getLogger(frmCaixa.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        double totalCompra = (Integer.parseInt(qtdProduto)* Double.parseDouble(precoUnit));
+        txtTotalCompra_caixa.setText(toString(totalCompra));
+        
+    }//GEN-LAST:event_txtTotalCompra_caixaActionPerformed
+
+    private void tblProdutos_caixaInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_tblProdutos_caixaInputMethodTextChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblProdutos_caixaInputMethodTextChanged
+
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -595,7 +668,7 @@ public final class frmCaixa extends javax.swing.JFrame {
     private javax.swing.JLabel lblBonus_cliente;
     private javax.swing.JLabel lblCliente_caixa;
     private javax.swing.JLabel lblCodCli_cliente;
-    private javax.swing.JLabel lblCodLocal;
+    private javax.swing.JLabel lblCodLocal_produto;
     private javax.swing.JLabel lblCodProduto_caixa;
     private javax.swing.JLabel lblCod_cliente;
     private javax.swing.JLabel lblCod_produto;
@@ -626,11 +699,15 @@ public final class frmCaixa extends javax.swing.JFrame {
     private javax.swing.JTextField txtQtd_caixa;
     private javax.swing.JTextField txtTotalCompra_caixa;
     private javax.swing.JTextField txtbonus_cliente;
-    private javax.swing.JTextField txtcodcliente;
+    private javax.swing.JTextField txtcod_cliente;
     private javax.swing.JTextField txtcodlocal_produto;
     private javax.swing.JTextField txtcodprod_produto;
     private javax.swing.JTextField txtdescricao_produto;
-    private javax.swing.JTextField txtnomelocal;
+    private javax.swing.JTextField txtnomelocal_produto;
     private javax.swing.JFormattedTextField txtprecoUnit_produto;
     // End of variables declaration//GEN-END:variables
+
+    private String toString(double totalCompra) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
