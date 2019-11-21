@@ -598,6 +598,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtDescricao_caixa">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDescricao_caixaActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="tabelaProduto_caixa">
               <AuxValues>
@@ -713,6 +716,9 @@
             <Component class="javax.swing.JTextField" name="txtLocalVenda_caixa">
             </Component>
             <Component class="javax.swing.JTextField" name="txtCodProduto_caixa">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCodProduto_caixaActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblCodCli_cliente">
               <Properties>

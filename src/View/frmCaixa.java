@@ -114,7 +114,7 @@ public final class frmCaixa extends javax.swing.JFrame {
         setBackground(new java.awt.Color(153, 153, 153));
 
         PDV.setBackground(new java.awt.Color(153, 153, 153));
-        PDV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        PDV.setBorder(new javax.swing.border.SoftBevelBorder(0));
         PDV.setForeground(new java.awt.Color(0, 0, 153));
 
         cliente.setBackground(new java.awt.Color(229, 255, 255));
@@ -346,6 +346,12 @@ public final class frmCaixa extends javax.swing.JFrame {
         lblDescricao_caixa.setText("Descrição do Produto");
         lblDescricao_caixa.setToolTipText("");
 
+        txtDescricao_caixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescricao_caixaActionPerformed(evt);
+            }
+        });
+
         tblProdutos_caixa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -413,6 +419,12 @@ public final class frmCaixa extends javax.swing.JFrame {
         txtNomecliente_caixa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomecliente_caixaActionPerformed(evt);
+            }
+        });
+
+        txtCodProduto_caixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodProduto_caixaActionPerformed(evt);
             }
         });
 
@@ -602,7 +614,17 @@ public final class frmCaixa extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCodCli_clienteActionPerformed
 
     private void txtQtd_caixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtd_caixaActionPerformed
-        // TODO add your handling code here:
+        String codCliente = txtcod_cliente.getText();
+        String qtd = txtQtd_caixa.getText();
+        String buscaQtd = "SELECT * FROM produto WHERE QTD_ESTOQUE = '" + qtd + "'";
+        con_produto.executaSQL(buscaQtd);
+        if(Integer.parseInt(qtd)>Integer.parseInt(buscaQtd)){
+            JOptionPane.showMessageDialog(null, "PRODUTO SEM ESTOQUE!");
+        } else { 
+            String mostraDescricao = "SELECT descricao FROM produto WHERE CODCLI = '" + codCliente + "'";
+            con_produto.executaSQL(mostraDescricao);
+            txtDescricao_caixa.setText(mostraDescricao);
+        }
     }//GEN-LAST:event_txtQtd_caixaActionPerformed
 
     private void txtTotalCompra_caixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalCompra_caixaActionPerformed
@@ -623,7 +645,18 @@ public final class frmCaixa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tblProdutos_caixaInputMethodTextChanged
 
+    private void txtCodProduto_caixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodProduto_caixaActionPerformed
+        String codProd = txtCodProduto_caixa.getText();
+        String buscaCod = "SELECT * FROM produto WHERE CODPROD = '" + codProd + "'";
+        con_produto.executaSQL(buscaCod);
+        if(buscaCod.isEmpty()){
+            JOptionPane.showMessageDialog(null, "PRODUTO NÃO ENCONTRADO!");
+        }
+    }//GEN-LAST:event_txtCodProduto_caixaActionPerformed
 
+    private void txtDescricao_caixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescricao_caixaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescricao_caixaActionPerformed
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
