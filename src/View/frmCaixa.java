@@ -72,6 +72,8 @@ public final class frmCaixa extends javax.swing.JFrame {
         lblPerfil = new javax.swing.JLabel();
         comboPerfil_cliente = new javax.swing.JComboBox<>();
         btnSalvar_cliente = new javax.swing.JButton();
+        lblStatus_cliente = new javax.swing.JLabel();
+        jComboStatus_cliente = new javax.swing.JComboBox<>();
         produto = new javax.swing.JPanel();
         lblTitulo_produto = new javax.swing.JLabel();
         lblCod_produto = new javax.swing.JLabel();
@@ -114,7 +116,7 @@ public final class frmCaixa extends javax.swing.JFrame {
         setBackground(new java.awt.Color(153, 153, 153));
 
         PDV.setBackground(new java.awt.Color(153, 153, 153));
-        PDV.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        PDV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         PDV.setForeground(new java.awt.Color(0, 0, 153));
 
         cliente.setBackground(new java.awt.Color(229, 255, 255));
@@ -149,17 +151,16 @@ public final class frmCaixa extends javax.swing.JFrame {
             }
         });
 
+        lblStatus_cliente.setText("Status: ");
+
+        jComboStatus_cliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ATIVO", "INATIVO" }));
+
         javax.swing.GroupLayout clienteLayout = new javax.swing.GroupLayout(cliente);
         cliente.setLayout(clienteLayout);
         clienteLayout.setHorizontalGroup(
             clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(clienteLayout.createSequentialGroup()
                 .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(clienteLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblPerfil)
-                        .addGap(18, 18, 18)
-                        .addComponent(comboPerfil_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(clienteLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblNome_cliente)
@@ -175,12 +176,23 @@ public final class frmCaixa extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtbonus_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(clienteLayout.createSequentialGroup()
-                        .addGap(253, 253, 253)
-                        .addComponent(btnSalvar_cliente))
-                    .addGroup(clienteLayout.createSequentialGroup()
                         .addGap(182, 182, 182)
-                        .addComponent(lblTitulo_cliente)))
-                .addContainerGap(48, Short.MAX_VALUE))
+                        .addComponent(lblTitulo_cliente))
+                    .addGroup(clienteLayout.createSequentialGroup()
+                        .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, clienteLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblPerfil)
+                                .addGap(18, 18, 18)
+                                .addComponent(comboPerfil_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblStatus_cliente))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, clienteLayout.createSequentialGroup()
+                                .addGap(253, 253, 253)
+                                .addComponent(btnSalvar_cliente)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboStatus_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         clienteLayout.setVerticalGroup(
             clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,7 +212,9 @@ public final class frmCaixa extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboPerfil_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPerfil))
+                    .addComponent(lblPerfil)
+                    .addComponent(lblStatus_cliente)
+                    .addComponent(jComboStatus_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(111, 111, 111)
                 .addComponent(btnSalvar_cliente)
                 .addGap(47, 47, 47))
@@ -240,6 +254,11 @@ public final class frmCaixa extends javax.swing.JFrame {
 
         btnSalvar_produto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/AwesomeScreenshot-TRE-SP-2019-07-26-23-07-03.png"))); // NOI18N
         btnSalvar_produto.setText("Salvar");
+        btnSalvar_produto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvar_produtoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout produtoLayout = new javax.swing.GroupLayout(produto);
         produto.setLayout(produtoLayout);
@@ -589,11 +608,26 @@ public final class frmCaixa extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNome_clienteActionPerformed
 
     private void btnSalvar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar_clienteActionPerformed
+        String cod = txtCodCli_cliente.getText();
         String nome = txtNome_cliente.getText();
-        String local = txtLocalVenda_caixa.getText();
-        String cod = txtCodProduto_caixa.getText();
-        String qtd = txtQtd_caixa.getText();
-        String descricao = txtDescricao_caixa.getText();
+        String perfil = comboPerfil_cliente.getSelectedItem().toString();
+        String status = jComboStatus_cliente.getSelectedItem().toString();
+        String bonus = txtbonus_cliente.getText();
+        
+         try{
+         
+         String insert_sql = "INSERT INTO CLIENTE (CODCLI, NOME, BONUS, PERFIL, STATUS) values ('" + cod + "','" + nome + "','" +
+                 bonus + "','" + perfil + "','" + status +"')";
+         
+         con_cliente.statement.executeUpdate(insert_sql);
+         JOptionPane.showMessageDialog(null, "CLIENTE CADASTRADO");
+         
+         
+         con_cliente.resultset = con_cliente.statement.executeQuery("SELECT * FROM CLIENTE ORDER BY CODCLI");
+         con_cliente.resultset.first();
+     }catch (SQLException errosql){
+         JOptionPane.showMessageDialog(null,"ERRO AO CADASTRAR O CLIENTE! " + errosql);
+     }
     }//GEN-LAST:event_btnSalvar_clienteActionPerformed
 
     private void txtcodlocal_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcodlocal_produtoActionPerformed
@@ -657,6 +691,29 @@ public final class frmCaixa extends javax.swing.JFrame {
     private void txtDescricao_caixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescricao_caixaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDescricao_caixaActionPerformed
+
+    private void btnSalvar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar_produtoActionPerformed
+     String codProd = txtcodprod_produto.getText();
+     String codlocal = txtcodlocal_produto.getText();
+     String descProd = txtdescricao_produto.getText();
+     String qtdEstoque = spnQtdEstoque_produto.getValue().toString();
+     String precoUnit = txtprecoUnit_produto.getText();
+    
+     try{
+         
+         String insert_sql = "INSERT INTO PRODUTO (CODPROD, CODLOCAL, DESCRICAO, QTD_ESTOQUE, PRECO_UNITARIO) values ('" + codProd + "','" + codlocal + "','" +
+                 descProd + "','" + qtdEstoque + "','" + precoUnit +"')";
+         
+         con_produto.statement.executeUpdate(insert_sql);
+         JOptionPane.showMessageDialog(null, "PRODUTO CADASTRADO");
+         
+         
+         con_produto.resultset = con_venda.statement.executeQuery("SELECT * FROM PRODUTO ORDER BY CODPROD");
+         con_produto.resultset.first();
+     }catch (SQLException errosql){
+         JOptionPane.showMessageDialog(null,"ERRO AO CADASTRAR O PRODUTO! " + errosql);
+     }
+    }//GEN-LAST:event_btnSalvar_produtoActionPerformed
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -698,6 +755,7 @@ public final class frmCaixa extends javax.swing.JFrame {
     private javax.swing.JButton btnVender_caixa;
     private javax.swing.JPanel cliente;
     private javax.swing.JComboBox<String> comboPerfil_cliente;
+    private javax.swing.JComboBox<String> jComboStatus_cliente;
     private javax.swing.JLabel lblBonus_cliente;
     private javax.swing.JLabel lblCliente_caixa;
     private javax.swing.JLabel lblCodCli_cliente;
@@ -714,6 +772,7 @@ public final class frmCaixa extends javax.swing.JFrame {
     private javax.swing.JLabel lblPrecoUnit_produto;
     private javax.swing.JLabel lblQtdEstoque_produto;
     private javax.swing.JLabel lblQtd_caixa;
+    private javax.swing.JLabel lblStatus_cliente;
     private javax.swing.JLabel lblTitulo_caixa;
     private javax.swing.JLabel lblTitulo_cliente;
     private javax.swing.JLabel lblTitulo_produto;
