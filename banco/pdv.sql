@@ -65,6 +65,7 @@ CREATE TABLE `produto` (
 --
 
 CREATE TABLE `venda` (
+	`ID_VENDA` int(11) NOT NULL,
   `CODCLI` int(11) NOT NULL,
   `CODPROD` int(11) NOT NULL,
   `CODLOCAL` int(11) NOT NULL,
@@ -104,6 +105,9 @@ ALTER TABLE `produto`
 
 --
 -- Índices para tabela `venda`
+
+ALTER TABLE `produto`
+  ADD PRIMARY KEY (`ID_VENDA`);
 --
 ALTER TABLE `venda`
   ADD KEY `FK_CODCLI` (`CODCLI`),
@@ -114,6 +118,9 @@ ALTER TABLE `venda`
 -- AUTO_INCREMENT de tabelas despejadas
 --
 
+-- AUTO_INCREMENT de tabela `venda`
+ALTER TABLE `venda`
+  MODIFY `ID_VENDA` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de tabela `cliente`
 --

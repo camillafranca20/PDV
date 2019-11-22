@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public final class frmCaixa extends javax.swing.JFrame {
@@ -16,13 +17,22 @@ public final class frmCaixa extends javax.swing.JFrame {
     conexao con_local;
     conexao con_desconto;
     
-    public void mostrarDadosVenda(){
+    public void preencherTabela(){
+        tblProdutos_caixa.getColumnModel().getColumn(0).setPreferredWidth(35);
+        tblProdutos_caixa.getColumnModel().getColumn(1).setPreferredWidth(11);
+        tblProdutos_caixa.getColumnModel().getColumn(2).setPreferredWidth(14);
+        tblProdutos_caixa.getColumnModel().getColumn(3).setPreferredWidth(14);
+        
+        DefaultTableModel modelo = (DefaultTableModel) tblProdutos_caixa.getModel();
+        modelo.setNumRows(0);
+        
         try{
-            txtCodProduto_caixa.setText(con_venda.resultset.getString("CODPROD"));
-            txtNomecliente_caixa.setText(con_venda.resultset.getString("CODCLI"));
-            txtDescricao_caixa.setText(con_produto.resultset.getString("DESCRICAO"));
+            con_venda.resultset.beforeFirst();
+            modelo.addRow(new Object[]{con_venda.resultset.getString("CODPROD"),con_venda.resultset.getString("QTD_VENDA"),con_venda.resultset.getString("PRECO_UNITARIO"),
+                con_venda.resultset.getString("VALOR_TOTAL")
+            });
         }catch (SQLException erro){
-            JOptionPane.showMessageDialog(null,"Não localizou dados" + erro.getMessage());
+            JOptionPane.showMessageDialog(null, "\nErro ao listar dados da tabela\n Erro: " + erro);
         }
     }
 
@@ -359,7 +369,12 @@ public final class frmCaixa extends javax.swing.JFrame {
         });
 
         btnExcluir_caixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/Actions-edit-delete-icon.png"))); // NOI18N
-        btnExcluir_caixa.setText("Cancelar");
+        btnExcluir_caixa.setText("Excluir");
+        btnExcluir_caixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluir_caixaActionPerformed(evt);
+            }
+        });
 
         lblDescricao_caixa.setForeground(new java.awt.Color(0, 0, 153));
         lblDescricao_caixa.setText("Descrição do Produto");
@@ -714,6 +729,27 @@ public final class frmCaixa extends javax.swing.JFrame {
          JOptionPane.showMessageDialog(null,"ERRO AO CADASTRAR O PRODUTO! " + errosql);
      }
     }//GEN-LAST:event_btnSalvar_produtoActionPerformed
+
+    private void btnExcluir_caixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluir_caixaActionPerformed
+ String sql = "";
+ 
+ try{
+     int resposta = JOptionPane.showConfirmDialog(rootPane, "DESEJA EXCLUIR A VENDA?", "CONFIRMAR EXCLUSÃO", JOptionPane.YES_NO_OPTION,3);
+     if (resposta == 0){
+         sql = "DELETE FROM VENDA WHERE ID_VENDA = " + con_venda.resultset.first();
+     int excluir = con_venda.statement.executeUpdate(sql);
+     if (excluir == 1){
+         JOptionPane.showMessageDialog(rootPane, "VENDA EXCLUÍDA COM SUCESSO!");
+         con_venda.executaSQL("SELECT * FROM VENDA ORDER BY ID_VENDA");
+         con_venda.resultset.first();
+     }
+     } else {
+         JOptionPane.showMessageDialog(null, "\nOPERAÇÃO CANCELADA PELO USUÁRIO\n");
+     }
+ }catch(SQLException ex){
+     JOptionPane.showMessageDialog(null, "\nERRO NA EXCLUSÃO\nERRO: " + ex + "\nCOMANDO SQL PASSADO: \n" + sql);
+ }
+    }//GEN-LAST:event_btnExcluir_caixaActionPerformed
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
